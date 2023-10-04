@@ -250,4 +250,13 @@ export class GameEngine extends EventEmitter {
    * **`addEventListener`** An alias for `EventEmitter.on`
    */
   addEventListener = this.on;
+
+  /**
+   * **`trigger`** An alias for `EventEmitter.emit`
+   */
+  trigger = this.emit;
+  /**
+   * **`triggerEvent`** An alias for `EventEmitter.emit`
+   */
+  triggerEvent = this.emit;
 }
