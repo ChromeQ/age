@@ -2,7 +2,7 @@
   "name": "rn-age",
   "version": "1.0.0",
   "description": "React Native Abstract Gamification Engine",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/ChromeQ/rn-age",
   "author": "ChromeQ",
   "license": "MIT",
