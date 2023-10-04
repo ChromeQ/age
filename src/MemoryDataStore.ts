@@ -32,7 +32,10 @@ export class MemoryDataStore extends DataStore {
     this.gameStates[player.id] =
       this.gameStates[player.id] || this.makePlayer(player);
 
-    this.gameStates[player.id]?.history.push(event);
+    this.gameStates[player.id]?.history.push({
+      timestamp: new Date(),
+      event,
+    });
   }
 
   /**
@@ -42,6 +45,10 @@ export class MemoryDataStore extends DataStore {
     this.gameStates[player.id] =
       this.gameStates[player.id] || this.makePlayer(player);
 
+    this.gameStates[player.id]?.history.push({
+      timestamp: achievement.achieved,
+      achievement,
+    });
     this.gameStates[player.id]?.achievements.push(achievement);
   }
 

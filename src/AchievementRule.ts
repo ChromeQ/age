@@ -42,8 +42,8 @@ interface AchievementRuleProps {
    *    once for each element of the array.
    *  - a function that yields a scalar value or an array, in which case the
    *    function is evaluated and the corresponding scalar or array is treated
-   *    as above.  This function is passed three arguments: a GameEngine instance,
-   *    a player object, and a callback function (that accepts an error parameter and a key value).
+   *    as above. This function is passed two arguments: a Player object and a
+   *    GameEngine instance. It returns a single key or an array of keys.
    *
    * The latter case (the function) can be used to create dynamic identifiers.
    * For example, for an achievement such as "Logged in on <DATE>".
@@ -55,26 +55,19 @@ interface AchievementRuleProps {
     | number
     | string[]
     | number[]
+    | (string | number)[]
     | ((
-        engine: GameEngine,
         player: GamePlayer,
-        callback: (err: unknown, key: string | number) => void
-      ) => void);
+        engine: GameEngine
+      ) => string | number | string[] | number[] | (string | number)[]);
   /**
-   * **`predicate`** -- a function (accepting three arguments: a GameEngine instance,
-   * a player object and a callback function) that evaluates whether or not the
-   * given player has earned this achievement. The callback function accepts
-   * two arguments: an error object (which should be `null` when no error has occurred)
-   * and a boolean indicating whether or not the achievement has been achieved.
+   * **`predicate`** -- a function (accepting two arguments: a Player object and
+   * a GameEngine instance. It returns a boolean after evaluating whether or not the
+   * given player has earned this achievement.
    *
-   * No default value is provided for this property. Instances or subclasses
-   * must provide a `predicate` method.
+   * No default value is provided for this property. Instances or subclasses must override this property.
    */
-  predicate: (
-    engine: GameEngine,
-    player: GamePlayer,
-    callback: (error: unknown, achieved: boolean) => void
-  ) => void;
+  predicate: (player: GamePlayer, engine: GameEngine) => boolean;
 }
 
 export class AchievementRule {

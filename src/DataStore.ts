@@ -5,16 +5,16 @@ import { Player, Event, Achievement, HistoryItem, GamePlayer } from "./@types";
 
 export class DataStore {
   /**
-   * **`makePlayer`** creates a new player object based on the given `playerData` object, if any.
-   * @param player An object containing the player id and any additional meta-data for the player
-   * @returns Player
+   * **`makePlayer`** creates a new player object based on the given `data` object, must contain an `id`.
+   * @param data An object containing the player id and any additional meta-data for the player
+   * @returns GamePlayer
    */
-  makePlayer(player: Player): GamePlayer {
+  makePlayer(data: Player): GamePlayer {
     return {
-      id: player.id,
+      id: data.id,
       achievements: [],
       history: [],
-      data: player,
+      data,
     };
   }
 

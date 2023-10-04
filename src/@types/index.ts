@@ -8,8 +8,15 @@ export interface GamePlayer<T extends Player = Player> {
   data: T;
 }
 
-export interface Achievement {}
+export interface Achievement {
+  name: string | number;
+  achieved: Date;
+}
 
-export interface HistoryItem {}
+export interface Event {
+  name: string | number;
+}
 
-export interface Event {}
+export type HistoryItem = {
+  timestamp: Date;
+} & ({ event: Event } | { achievement: Achievement });
