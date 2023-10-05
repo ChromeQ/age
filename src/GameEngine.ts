@@ -10,7 +10,13 @@
  * The GameEngine is an `EventEmitter`, emitting events when an
  * event has occured or an achievement has been achieved.
  */
-import { Achievement, Event, GamePlayer, HistoryItem, Player } from "./@types";
+import type {
+  Achievement,
+  Event,
+  GamePlayer,
+  HistoryItem,
+  Player,
+} from "./@types";
 import { AchievementRule } from "./AchievementRule";
 import { DataStore } from "./DataStore";
 import { MemoryDataStore } from "./MemoryDataStore";

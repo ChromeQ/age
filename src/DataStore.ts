@@ -1,7 +1,13 @@
 /**
  * DataStore defines an abstract API by which the `GameEngine` can save, persist and retrieve information about players and game states.
  */
-import { Player, Event, Achievement, HistoryItem, GamePlayer } from "./@types";
+import type {
+  Player,
+  Event,
+  Achievement,
+  HistoryItem,
+  GamePlayer,
+} from "./@types";
 
 export class DataStore {
   /**

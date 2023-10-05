@@ -6,7 +6,7 @@
  * This base class simply provides a handy place to document these assumptions
  * and to provide default properties that are sufficient for most use cases.
  */
-import { GameEngine, GamePlayer } from "./@types";
+import type { GameEngine, GamePlayer } from "./@types";
 
 /**
  * The `AchievementRule` constructor accepts an optional map of properties.

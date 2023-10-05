@@ -3,7 +3,8 @@
  * It does not provide a persistence mechanism.
  */
 import clonedeep from "lodash.clonedeep";
-import { Player, Event, GamePlayer, Achievement } from "./@types";
+
+import type { Player, Event, GamePlayer, Achievement } from "./@types";
 import { DataStore } from "./DataStore";
 
 export class MemoryDataStore extends DataStore {
