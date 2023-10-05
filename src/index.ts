@@ -1,4 +1,4 @@
-export type * as types from "./@types";
+export type * from "./@types";
 
 export { DataStore } from "./DataStore";
 export { MemoryDataStore } from "./MemoryDataStore";
