@@ -1,3 +1,5 @@
+export type * as types from "./@types";
+
 export { DataStore } from "./DataStore";
 export { MemoryDataStore } from "./MemoryDataStore";
 export { GameEngine } from "./GameEngine";

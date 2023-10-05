@@ -120,7 +120,10 @@ export class GameEngine extends EventEmitter {
    * @param player Player
    * @param achievementName Achievement Name
    */
-  addAchievement(player: Player, achievementName: Achievement["name"]): void {
+  private addAchievement(
+    player: Player,
+    achievementName: Achievement["name"]
+  ): void {
     const achievement: Achievement = {
       name: achievementName,
       achieved: new Date(),
@@ -220,6 +223,8 @@ export class GameEngine extends EventEmitter {
 
       if (!rule.transient) {
         this.addAchievement(player.data, key);
+      } else {
+        throw new Error("TODO: Transient rules not implemented");
       }
     }
   }
