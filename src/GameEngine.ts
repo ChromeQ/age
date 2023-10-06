@@ -10,18 +10,12 @@
  * The GameEngine is an `EventEmitter`, emitting events when an
  * event has occured or an achievement has been achieved.
  */
-import type {
-  Achievement,
-  Event,
-  GamePlayer,
-  HistoryItem,
-  Player,
-} from "./@types";
-import { AchievementRule } from "./AchievementRule";
-import { DataStore } from "./DataStore";
-import { MemoryDataStore } from "./MemoryDataStore";
-import { EventEmitter, Listener } from "events";
-import { countAchievement } from "./utils";
+import type { Achievement, Event, GamePlayer, HistoryItem, Player } from './@types';
+import { AchievementRule } from './AchievementRule';
+import { DataStore } from './DataStore';
+import { MemoryDataStore } from './MemoryDataStore';
+import { EventEmitter, Listener } from 'events';
+import { countAchievement } from './utils';
 
 interface GameEngineProps {
   /**
@@ -34,18 +28,14 @@ interface GameEngineProps {
   achievementRules: AchievementRule[];
 }
 
-type GAME_ENGINE_ACHIEVEMENT_ACHIEVED = "achievement-achieved";
-type GAME_ENGINE_EVENT_OCCURRED = "event-occurred";
+type GAME_ENGINE_ACHIEVEMENT_ACHIEVED = 'achievement-achieved';
+type GAME_ENGINE_EVENT_OCCURRED = 'event-occurred';
 type AchievementAchievedListener = (
   player: Player,
   achievement: Achievement,
   engine: GameEngine
 ) => void;
-type EventOccurredListener = (
-  player: Player,
-  event: Event,
-  engine: GameEngine
-) => void;
+type EventOccurredListener = (player: Player, event: Event, engine: GameEngine) => void;
 
 export class GameEngine extends EventEmitter {
   /**
@@ -57,8 +47,7 @@ export class GameEngine extends EventEmitter {
    * 2. `achievement` -- the achievement that was earned
    * 3. `engine` -- this GameEngine instance
    */
-  private AGE_ACHIEVED: GAME_ENGINE_ACHIEVEMENT_ACHIEVED =
-    "achievement-achieved";
+  private AGE_ACHIEVED: GAME_ENGINE_ACHIEVEMENT_ACHIEVED = 'achievement-achieved';
 
   /**
    * `GameEngine.AGE_EVENT` is the event type used when an event has
@@ -69,11 +58,11 @@ export class GameEngine extends EventEmitter {
    * 2. `event` -- the event that occurred
    * 3. `engine` -- this GameEngine instance
    */
-  private AGE_EVENT: GAME_ENGINE_EVENT_OCCURRED = "event-occurred";
+  private AGE_EVENT: GAME_ENGINE_EVENT_OCCURRED = 'event-occurred';
 
   private datastore: DataStore;
   private achievementRules: AchievementRule[] = [];
-  private _on: EventEmitter["on"];
+  private _on: EventEmitter['on'];
 
   /**
    * **GameEngine** constructor accepts two optional props.
@@ -102,7 +91,7 @@ export class GameEngine extends EventEmitter {
    * @param player Player
    * @param event Event
    */
-  addEvent(player: Player, eventName: Event["name"]): void {
+  addEvent(player: Player, eventName: Event['name']): void {
     const event: Event = {
       name: eventName,
     };
@@ -126,10 +115,7 @@ export class GameEngine extends EventEmitter {
    * @param player Player
    * @param achievementName Achievement Name
    */
-  private addAchievement(
-    player: Player,
-    achievementName: Achievement["name"]
-  ): void {
+  private addAchievement(player: Player, achievementName: Achievement['name']): void {
     const achievement: Achievement = {
       name: achievementName,
       achieved: new Date(),
@@ -189,8 +175,7 @@ export class GameEngine extends EventEmitter {
    * @param rule Achievement Rule
    */
   private evaluateAchievementRule(player: GamePlayer, rule: AchievementRule) {
-    const key =
-      typeof rule.key === "function" ? rule.key(player, this) : rule.key;
+    const key = typeof rule.key === 'function' ? rule.key(player, this) : rule.key;
     const keys = Array.isArray(key) ? key : [key];
 
     keys.forEach((key) => {
@@ -208,15 +193,11 @@ export class GameEngine extends EventEmitter {
    */
   private evaluateSingleAchievement(
     player: GamePlayer,
-    key: Achievement["name"],
+    key: Achievement['name'],
     rule: AchievementRule
   ) {
     if (rule.multiplicity > 0) {
-      const count = countAchievement(
-        player.achievements,
-        key,
-        rule.multiplicity
-      );
+      const count = countAchievement(player.achievements, key, rule.multiplicity);
 
       if (count >= rule.multiplicity) {
         return;
@@ -230,19 +211,13 @@ export class GameEngine extends EventEmitter {
       if (!rule.transient) {
         this.addAchievement(player.data, key);
       } else {
-        throw new Error("TODO: Transient rules not implemented");
+        throw new Error('TODO: Transient rules not implemented');
       }
     }
   }
 
-  on(
-    type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED,
-    listener: AchievementAchievedListener
-  ): typeof this;
-  on(
-    type: GAME_ENGINE_EVENT_OCCURRED,
-    listener: EventOccurredListener
-  ): typeof this;
+  on(type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED, listener: AchievementAchievedListener): typeof this;
+  on(type: GAME_ENGINE_EVENT_OCCURRED, listener: EventOccurredListener): typeof this;
   on(type: string, listener: Listener) {
     this._on.call(this, type, listener);
 

@@ -2,13 +2,13 @@
  * MemoryDataStore is a `DataStore` that stores the saved data as in-memory JavaScript objects.
  * It does not provide a persistence mechanism.
  */
-import clonedeep from "lodash.clonedeep";
+import clonedeep from 'lodash.clonedeep';
 
-import type { Player, Event, GamePlayer, Achievement } from "./@types";
-import { DataStore } from "./DataStore";
+import type { Player, Event, GamePlayer, Achievement } from './@types';
+import { DataStore } from './DataStore';
 
 export class MemoryDataStore extends DataStore {
-  gameStates: Record<Player["id"], GamePlayer>;
+  gameStates: Record<Player['id'], GamePlayer>;
 
   /**
    * **`MemoryDataStore`** constructor accepts no arguments.
@@ -22,16 +22,14 @@ export class MemoryDataStore extends DataStore {
    * See `DataStore.recordPlayer`
    */
   recordPlayer(player: Player): void {
-    this.gameStates[player.id] =
-      this.gameStates[player.id] || this.makePlayer(player);
+    this.gameStates[player.id] = this.gameStates[player.id] || this.makePlayer(player);
   }
 
   /**
    * See `DataStore.recordEvent`
    */
   recordEvent(player: Player, event: Event): void {
-    this.gameStates[player.id] =
-      this.gameStates[player.id] || this.makePlayer(player);
+    this.gameStates[player.id] = this.gameStates[player.id] || this.makePlayer(player);
 
     this.gameStates[player.id]?.history.push({
       timestamp: new Date(),
@@ -43,8 +41,7 @@ export class MemoryDataStore extends DataStore {
    * See `DataStore.recordAchievement`
    */
   recordAchievement(player: Player, achievement: Achievement): void {
-    this.gameStates[player.id] =
-      this.gameStates[player.id] || this.makePlayer(player);
+    this.gameStates[player.id] = this.gameStates[player.id] || this.makePlayer(player);
 
     this.gameStates[player.id]?.history.push({
       timestamp: achievement.achieved,

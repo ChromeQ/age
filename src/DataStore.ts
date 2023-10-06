@@ -1,13 +1,7 @@
 /**
  * DataStore defines an abstract API by which the `GameEngine` can save, persist and retrieve information about players and game states.
  */
-import type {
-  Player,
-  Event,
-  Achievement,
-  HistoryItem,
-  GamePlayer,
-} from "./@types";
+import type { Player, Event, Achievement, HistoryItem, GamePlayer } from './@types';
 
 export class DataStore {
   /**
@@ -30,7 +24,7 @@ export class DataStore {
    * @param player Player
    */
   recordPlayer(player: Player): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   /**
@@ -40,7 +34,7 @@ export class DataStore {
    * @param event Event
    */
   recordEvent(player: Player, event: Event): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   /**
@@ -50,7 +44,7 @@ export class DataStore {
    * @param achievement Achievement
    */
   recordAchievement(player: Player, achievement: Achievement): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   /**
@@ -60,7 +54,7 @@ export class DataStore {
    * @returns GamePlayer
    */
   getPlayer(player: Player): GamePlayer | undefined {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   /**

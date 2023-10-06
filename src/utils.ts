@@ -1,8 +1,8 @@
-import type { Achievement } from "./@types";
+import type { Achievement } from './@types';
 
 export const countAchievement: (
   arr: Achievement[],
-  val: Achievement["name"],
+  val: Achievement['name'],
   max?: number
 ) => number = (arr, val, max) => {
   let count = 0;

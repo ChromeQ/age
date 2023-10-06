@@ -1,9 +1,9 @@
-export type { GameEngine } from "../GameEngine";
+export type { GameEngine } from '../GameEngine';
 
 export type Player = Record<string, unknown> & { id: string | number };
 
 export interface GamePlayer<T extends Player = Player> {
-  id: Player["id"];
+  id: Player['id'];
   achievements: Achievement[];
   history: HistoryItem[];
   data: T;

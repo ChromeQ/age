@@ -6,7 +6,7 @@
  * This base class simply provides a handy place to document these assumptions
  * and to provide default properties that are sufficient for most use cases.
  */
-import type { GameEngine, GamePlayer } from "./@types";
+import type { GameEngine, GamePlayer } from './@types';
 
 /**
  * The `AchievementRule` constructor accepts an optional map of properties.
@@ -71,13 +71,13 @@ interface AchievementRuleProps {
 }
 
 export class AchievementRule {
-  multiplicity: AchievementRuleProps["multiplicity"] = 0;
-  transient: AchievementRuleProps["transient"] = false;
-  key: AchievementRuleProps["key"] = () => {
-    throw new Error("Method not implemented.");
+  multiplicity: AchievementRuleProps['multiplicity'] = 0;
+  transient: AchievementRuleProps['transient'] = false;
+  key: AchievementRuleProps['key'] = () => {
+    throw new Error('Method not implemented.');
   };
-  predicate: AchievementRuleProps["predicate"] = () => {
-    throw new Error("Method not implemented.");
+  predicate: AchievementRuleProps['predicate'] = () => {
+    throw new Error('Method not implemented.');
   };
 
   /**
