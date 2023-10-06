@@ -70,4 +70,3 @@ engine.on('achievement-achieved', async (player, achievement) => {
     console.log('ACHIEVEMENT ACHIEVED', player, achievement);
 });
 ```
-

@@ -11,9 +11,11 @@ jobs:
     steps:
       - name: 💾 Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
 
       - name: ⚙️ Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18.18.0'
           registry-url: 'https://registry.npmjs.org'
@@ -23,13 +25,26 @@ jobs:
         with:
           cmd: install
 
-      - name: 👊 Bump
-        uses: anothrNick/github-tag-action@1.36.0
+      - name: 🏷️ Tag
+        id: tagging
+        uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+          MAJOR_STRING_TOKEN: \[ci major\]
+          MINOR_STRING_TOKEN: \[ci minor\]
+          PATCH_STRING_TOKEN: \[ci patch\]
+          NONE_STRING_TOKEN: \[ci skip\]
+          BRANCH_HISTORY: last
+          DRY_RUN: true
 
-      - name: 📦 Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: 👊 Bump
+        run: |
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name github-actions[bot]
+
+          yarn version --new-version ${{ steps.tagging.outputs.new_tag }} --message "Version bump to v${{ steps.tagging.outputs.new_tag }} [ci skip]"
+          git push --follow-tags
+      # - name: 📦 Publish
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
