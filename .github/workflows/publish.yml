@@ -25,6 +25,11 @@ jobs:
         with:
           cmd: install
 
+      - name: ✨ Lint 
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint
+
       - name: 🏷️ Tag
         id: tagging
         uses: anothrNick/github-tag-action@1.67.0
