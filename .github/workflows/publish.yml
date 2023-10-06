@@ -44,7 +44,8 @@ jobs:
 
           yarn version --new-version ${{ steps.tagging.outputs.new_tag }} --message "Version bump to v${{ steps.tagging.outputs.new_tag }} [ci skip]"
           git push --follow-tags
-      # - name: 📦 Publish
-      #   run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 📦 Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
