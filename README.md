@@ -1,18 +1,21 @@
 # **AGE** -- Abstract Gamification Engine.
 
-This is a rewrite of (rodw/age)[https://github.com/rodw/age] from coffeescript to TypeScript. Mostly it is the same but with some notable changes:
+This is a rewrite of [rodw/age](https://github.com/rodw/age) from coffeescript to TypeScript. Mostly it is the same but with some notable changes:
 
 1. Renamed all methods from snake_case to camelCase
-2. Achievement Rules are evaluated on event received rather than on `getPlayerAchievments`
+2. Achievement Rules are evaluated on event received rather than on `getPlayerAchievements`
 3. Achieved Achievements are also added to the `player.history`
-4. Transient rules are not yet implemented
-5. History entries are objects with a timestamp Date, and Achievements have an `achieved` Date
-6. Methods return values rather than replying on Node style callbacks with errors
+4. Transient rules are not yet implemented (TODO coming soon)
+5. History entries are objects with a `timestamp` Date, and Achievements have an `achieved` Date
+6. Methods return values rather than replying in Node style callbacks with errors
 
 ## Installation
 
 ```bash
 npm install @chromeq/age
+
+# or
+yarn add @chromeq/age
 ```
 
 ## Examples
@@ -60,12 +63,12 @@ engine.addEvent(player, 'SessionCount'); // TODO: Add extra data to the event
 ```ts
 // Subscribe to `'achievement-achieved'` or `'event-occurred'` -- Also has alias `listen`, `addListner` or `addEventListner`
 
-engine.on('event-occurred', async (player, event) => {
+engine.on('event-occurred', (player, event) => {
     // Useful to "chain" events and you can call `engine.addEvent` again here
     console.log('EVENT OCCURRED', player, event);
 });
 
-engine.on('achievement-achieved', async (player, achievement) => {
+engine.on('achievement-achieved', (player, achievement) => {
     // Congrats 🎉 - Show the appropriate UI or save state
     console.log('ACHIEVEMENT ACHIEVED', player, achievement);
 });
