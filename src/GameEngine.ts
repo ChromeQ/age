@@ -10,7 +10,15 @@
  * The GameEngine is an `EventEmitter`, emitting events when an
  * event has occured or an achievement has been achieved.
  */
-import type { Achievement, Event, GamePlayer, HistoryItem, Player } from './@types';
+import type {
+  Achievement,
+  AchievementAchievedListener,
+  Event,
+  EventOccurredListener,
+  GamePlayer,
+  HistoryItem,
+  Player,
+} from './@types';
 import { AchievementRule } from './AchievementRule';
 import { DataStore } from './DataStore';
 import { MemoryDataStore } from './MemoryDataStore';
@@ -34,12 +42,6 @@ interface GameEngineProps {
 
 type GAME_ENGINE_ACHIEVEMENT_ACHIEVED = 'achievement-achieved';
 type GAME_ENGINE_EVENT_OCCURRED = 'event-occurred';
-type AchievementAchievedListener = (
-  player: Player,
-  achievement: Achievement,
-  engine: GameEngine
-) => void;
-type EventOccurredListener = (player: Player, event: Event, engine: GameEngine) => void;
 
 export class GameEngine extends EventEmitter {
   /**

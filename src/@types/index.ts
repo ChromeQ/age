@@ -1,4 +1,5 @@
-export type { GameEngine } from '../GameEngine';
+import type { GameEngine } from '../GameEngine';
+export type { GameEngine };
 
 export type Player = Record<string, unknown> & { id: string | number };
 
@@ -22,3 +23,11 @@ export interface Event<T = unknown> {
 export type HistoryItem = {
   timestamp: Date;
 } & ({ event: Event } | { achievement: Achievement });
+
+export type AchievementAchievedListener = (
+  player: Player,
+  achievement: Achievement,
+  engine: GameEngine
+) => void;
+
+export type EventOccurredListener = (player: Player, event: Event, engine: GameEngine) => void;
