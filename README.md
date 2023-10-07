@@ -6,8 +6,9 @@ This is a rewrite of [rodw/age](https://github.com/rodw/age) from coffeescript t
 2. Achievement Rules are evaluated on event received rather than on `getPlayerAchievements`
 3. Achieved Achievements are also added to the `player.history`
 4. Transient rules are not yet implemented (TODO coming soon)
-5. History entries are objects with a `timestamp` Date, and Achievements have an `achieved` Date
-6. Methods return values rather than replying in Node style callbacks with errors
+5. Events are now an object with a `name` and optional `<T>data`
+6. History entries are objects with a `timestamp` Date, and Achievements are also added to `player.history` and have an `achieved` Date
+7. Methods return values rather than replying in Node style callbacks with errors
 
 ## Installation
 

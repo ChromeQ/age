@@ -26,6 +26,10 @@ interface GameEngineProps {
    * **achievementRules** -- An array of achievement rules (default to empty array)
    */
   achievementRules: AchievementRule[];
+  /**
+   * **players** -- An array of players (default to empty array)
+   */
+  players: Player[];
 }
 
 type GAME_ENGINE_ACHIEVEMENT_ACHIEVED = 'achievement-achieved';
@@ -72,6 +76,11 @@ export class GameEngine extends EventEmitter {
     this.datastore = props?.datastore || new MemoryDataStore();
     this.achievementRules = props?.achievementRules || this.achievementRules;
 
+    // Players aren't stored in GameEngine so loop to the `addPlayer` method
+    props?.players?.forEach((player) => {
+      this.addPlayer(player);
+    });
+
     this._on = super.on;
   }
 
@@ -91,9 +100,10 @@ export class GameEngine extends EventEmitter {
    * @param player Player
    * @param event Event
    */
-  addEvent(player: Player, eventName: Event['name']): void {
-    const event: Event = {
+  addEvent<T = unknown>(player: Player, eventName: Event['name'], data?: T): void {
+    const event: Event<T> = {
       name: eventName,
+      data,
     };
 
     this.datastore.recordEvent(player, event);

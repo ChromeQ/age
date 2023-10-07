@@ -14,8 +14,9 @@ export interface Achievement {
   achieved: Date;
 }
 
-export interface Event {
+export interface Event<T = unknown> {
   name: string | number;
+  data?: T;
 }
 
 export type HistoryItem = {
