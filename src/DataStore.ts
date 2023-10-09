@@ -22,8 +22,9 @@ export class DataStore {
    * **`recordPlayer`** ensures that the datastore contains a player object for the specified `player` data
    * This method is not implemented in the base DataStore object. Subclasses must override and implement this method
    * @param player Player
+   * @returns A function to remove the Player from the DataStore
    */
-  recordPlayer(player: Player): void {
+  recordPlayer(player: Player): () => void {
     throw new Error('Method not implemented.');
   }
 

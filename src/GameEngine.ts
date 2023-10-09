@@ -90,9 +90,10 @@ export class GameEngine extends EventEmitter {
    * **`addPlayer`** ensures that a player object exists for the given `player`.
    * The `player` MUST have an `id` property.
    * @param player Player
+   * @returns A function to remove the Player from the engine
    */
-  addPlayer(player: Player): void {
-    this.datastore.recordPlayer(player);
+  addPlayer(player: Player): () => void {
+    return this.datastore.recordPlayer(player);
   }
 
   /**
@@ -145,9 +146,18 @@ export class GameEngine extends EventEmitter {
    *
    * See the `AchievementRule` type for more details.
    * @param rule Achievement Rule
+   * @returns A function to remove the Rule from the engine
    */
-  addAchievementRule(rule: AchievementRule): void {
+  addAchievementRule(rule: AchievementRule): () => void {
     this.achievementRules.push(rule);
+
+    return () => {
+      const index = this.achievementRules.findIndex((r) => r === rule);
+
+      if (index > -1) {
+        this.achievementRules.splice(index, 1);
+      }
+    };
   }
 
   /**

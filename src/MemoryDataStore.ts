@@ -21,8 +21,12 @@ export class MemoryDataStore extends DataStore {
   /**
    * See `DataStore.recordPlayer`
    */
-  recordPlayer(player: Player): void {
+  recordPlayer(player: Player): () => void {
     this.gameStates[player.id] = this.gameStates[player.id] || this.makePlayer(player);
+
+    return () => {
+      delete this.gameStates[player.id];
+    };
   }
 
   /**
