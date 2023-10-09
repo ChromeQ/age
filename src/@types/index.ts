@@ -20,9 +20,11 @@ export interface Event<T = unknown> {
   data?: T;
 }
 
-export type HistoryItem = {
+export type HistoryItem<T = unknown> = {
   timestamp: Date;
-} & ({ event: Event } | { achievement: Achievement });
+  event?: Event<T>;
+  achievement?: Achievement;
+};
 
 export type AchievementAchievedListener = (
   player: Player,
