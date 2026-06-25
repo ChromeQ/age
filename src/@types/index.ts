@@ -30,6 +30,6 @@ export type AchievementAchievedListener = (
   player: Player,
   achievement: Achievement,
   engine: GameEngine
-) => void;
+) => Promise<void> | void;
 
 export type EventOccurredListener = (player: Player, event: Event, engine: GameEngine) => void;
