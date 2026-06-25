@@ -68,7 +68,11 @@ export class GameEngine extends EventEmitter {
 
   private datastore: DataStore;
   private achievementRules: AchievementRule[] = [];
+  private _prependListener: EventEmitter['prependListener'];
+  private _prependOnceListener: EventEmitter['prependOnceListener'];
   private _on: EventEmitter['on'];
+  private _once: EventEmitter['once'];
+  private _off: EventEmitter['off'];
 
   /**
    * **GameEngine** constructor accepts two optional props.
@@ -83,7 +87,11 @@ export class GameEngine extends EventEmitter {
       this.addPlayer(player);
     });
 
+    this._prependListener = super.prependListener;
+    this._prependOnceListener = super.prependOnceListener;
     this._on = super.on;
+    this._once = super.once;
+    this._off = super.off;
   }
 
   /**
@@ -238,10 +246,51 @@ export class GameEngine extends EventEmitter {
     }
   }
 
+  prependListener(
+    type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED,
+    listener: AchievementAchievedListener
+  ): typeof this;
+  prependListener(type: GAME_ENGINE_EVENT_OCCURRED, listener: EventOccurredListener): typeof this;
+  prependListener(type: string, listener: Listener) {
+    this._prependListener.call(this, type, listener);
+
+    return this;
+  }
+
+  prependOnceListener(
+    type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED,
+    listener: AchievementAchievedListener
+  ): typeof this;
+  prependOnceListener(
+    type: GAME_ENGINE_EVENT_OCCURRED,
+    listener: EventOccurredListener
+  ): typeof this;
+  prependOnceListener(type: string, listener: Listener) {
+    this._prependOnceListener.call(this, type, listener);
+
+    return this;
+  }
+
   on(type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED, listener: AchievementAchievedListener): typeof this;
   on(type: GAME_ENGINE_EVENT_OCCURRED, listener: EventOccurredListener): typeof this;
   on(type: string, listener: Listener) {
     this._on.call(this, type, listener);
+
+    return this;
+  }
+
+  once(type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED, listener: AchievementAchievedListener): typeof this;
+  once(type: GAME_ENGINE_EVENT_OCCURRED, listener: EventOccurredListener): typeof this;
+  once(type: string, listener: Listener) {
+    this._once.call(this, type, listener);
+
+    return this;
+  }
+
+  off(type: GAME_ENGINE_ACHIEVEMENT_ACHIEVED, listener: AchievementAchievedListener): typeof this;
+  off(type: GAME_ENGINE_EVENT_OCCURRED, listener: EventOccurredListener): typeof this;
+  off(type: string, listener: Listener) {
+    this._off.call(this, type, listener);
 
     return this;
   }
@@ -258,6 +307,19 @@ export class GameEngine extends EventEmitter {
    * **`addEventListener`** An alias for `EventEmitter.on`
    */
   addEventListener = this.on;
+
+  /**
+   * **`unlisten`** An alias for `EventEmitter.off`
+   */
+  unlisten = this.off;
+  /**
+   * **`removeListener`** An alias for `EventEmitter.off`
+   */
+  removeListener = this.off;
+  /**
+   * **`removeEventListener`** An alias for `EventEmitter.off`
+   */
+  removeEventListener = this.off;
 
   /**
    * **`dispatch`** An alias for `GameEngine.addEvent`
