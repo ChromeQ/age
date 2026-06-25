@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChromeQ/rn-age.git"
+    "url": "git+https://github.com/ChromeQ/age.git"
   },
   "bugs": {
-    "url": "https://github.com/ChromeQ/rn-age/issues"
+    "url": "https://github.com/ChromeQ/age/issues"
   },
-  "homepage": "https://github.com/ChromeQ/rn-age#readme",
+  "homepage": "https://github.com/ChromeQ/age#readme",
   "keywords": [
     "gamification",
     "game engine",
